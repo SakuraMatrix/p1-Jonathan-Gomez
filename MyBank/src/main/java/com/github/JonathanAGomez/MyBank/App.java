@@ -19,8 +19,8 @@ public class App {
 
     public static void main(String[] args) throws URISyntaxException {
         AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        appContext.getBean(HttpServer.class).bindUntilJavaShutdown(Duration.ofSeconds(60), null);
-        //appContext.getBean(DisposableServer.class).onDispose().block();
+        //appContext.getBean(HttpServer.class).bindUntilJavaShutdown(Duration.ofSeconds(60), null);
+        appContext.getBean(DisposableServer.class).onDispose().block();
     }
 
     static ByteBuf toByteBuf(Object o){

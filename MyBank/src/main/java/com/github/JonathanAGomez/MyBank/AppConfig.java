@@ -3,23 +3,17 @@ package com.github.JonathanAGomez.MyBank;
 import com.datastax.oss.driver.api.core.CqlSession;
 import com.github.JonathanAGomez.MyBank.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.server.RequestPredicate;
-import org.springframework.web.reactive.function.server.RouterFunction;
-import org.springframework.web.reactive.function.server.RouterFunctions;
-import org.springframework.web.reactive.function.server.ServerResponse;
-import org.springframework.web.server.adapter.*;
-import org.springframework.http.server.reactive.*;
+import org.springframework.http.server.reactive.HttpHandler;
+import org.springframework.http.server.reactive.ReactorHttpHandlerAdapter;
+import org.springframework.web.server.adapter.WebHttpHandlerBuilder;
 import reactor.core.publisher.Mono;
 import reactor.netty.DisposableServer;
 import reactor.netty.http.server.HttpServer;
 
-import javax.annotation.Resource;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -47,8 +41,9 @@ public class AppConfig {
                                                 .map(App::toByteBuf)
                                                 .log("http-server")))
                                 //Posts
-                                .post("/CustomerFormEntry", (request, response) ->
-                                        response.send(request.receive().asString()
+                                .post("/CustomerFormEntry/{param}", (request, response) ->
+                                        response.send(request.receive()
+                                                .asString()
                                                 .map(App::parseCustomer)
                                                 .map(customerService::create)
                                                 .map(App::toByteBuf)

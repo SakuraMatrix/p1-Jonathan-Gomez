@@ -20,6 +20,12 @@ public class CustomerRepository {
         );
     }
 
+    public Mono<Customer> get(String id){
+        return Mono.from(session.executeReactive("SELECT * FROM mybank.customers WHERE c_id = " +id))
+                .map(row -> new Customer(row.getInt("c_id"), row.getString("c_name"), row.getInt("account_id"))
+                );
+    }
+
     public Mono<Customer> get(int id) {
         return Mono.from(session.executeReactive("SELECT * FROM mybank.customers WHERE c_id = " +id))
                 .map(row -> new Customer(row.getInt("c_id"), row.getString("c_name"), row.getInt("account_id"))
@@ -29,7 +35,7 @@ public class CustomerRepository {
     public Customer create(Customer customer){
         SimpleStatement statement = SimpleStatement.builder("INSERT INTO mybank.customers (c_id, c_name, account_id) values (?, ?, ?)")
                 .addPositionalValues(customer.getId(), customer.getName(), customer.getAccount_id()).build();
-        Flux.from(session.executeReactive(statement)).subscribe();
+        Flux.from(session.executeReactive(statement)).doOnNext(System.out::println).blockLast();
         return customer;
     }
 }
