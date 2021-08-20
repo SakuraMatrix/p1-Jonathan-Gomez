@@ -7,17 +7,20 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import reactor.netty.DisposableServer;
+import reactor.netty.http.server.HttpServer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.time.Duration;
 
 public class App {
     static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     public static void main(String[] args) throws URISyntaxException {
         AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        appContext.getBean(DisposableServer.class).onDispose().block();
+        appContext.getBean(HttpServer.class).bindUntilJavaShutdown(Duration.ofSeconds(60), null);
+        //appContext.getBean(DisposableServer.class).onDispose().block();
     }
 
     static ByteBuf toByteBuf(Object o){

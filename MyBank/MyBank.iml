@@ -66,10 +66,8 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-core:5.3.9" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.3.9" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.3.9" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-cassandra:3.2.4" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.3.9" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.5.4" level="project" />
-    <orderEntry type="library" name="Maven: com.datastax.oss:java-driver-query-builder:4.11.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-webflux:5.3.9" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-web:5.3.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.3.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.projectreactor:reactor-test:3.4.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.2" level="project" />
