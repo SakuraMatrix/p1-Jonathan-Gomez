@@ -34,8 +34,18 @@ public class CustomerRepository {
 
     public Customer create(Customer customer){
         SimpleStatement statement = SimpleStatement.builder("INSERT INTO mybank.customers (c_id, c_name, account_id) values (?, ?, ?)")
-                .addPositionalValues(customer.getId(), customer.getName(), customer.getAccount_id()).build();
-        Flux.from(session.executeReactive(statement)).doOnNext(System.out::println).blockLast();
+                .addPositionalValues(customer.getId(), customer.getName(), customer.getAccount_id())
+                .build();
+        Flux.from(session.executeReactive(statement)).subscribe();
         return customer;
+    }
+
+
+    public Mono<Customer> delete(Customer customer){
+        SimpleStatement statement = SimpleStatement.builder("DELETE FROM mybank.customers where c_id = ?")
+                .addPositionalValue(customer.getId())
+                .build();
+        Flux.from(session.executeReactive(statement)).subscribe();
+        return Mono.just(customer);
     }
 }

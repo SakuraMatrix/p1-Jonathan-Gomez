@@ -41,11 +41,18 @@ public class AppConfig {
                                                 .map(App::toByteBuf)
                                                 .log("http-server")))
                                 //Posts
-                                .post("/CustomerFormEntry/{param}", (request, response) ->
+                                .post("/CustomerFormEntry/add", (request, response) ->
                                         response.send(request.receive()
                                                 .asString()
                                                 .map(App::parseCustomer)
                                                 .map(customerService::create)
+                                                .map(App::toByteBuf)
+                                                .log("http-server")))
+                                .post("/CustomerFormEntry/delete/{id}", (request, response) ->
+                                        response.send(request.receive()
+                                                .asString()
+                                                .map(App::parseCustomer)
+                                                .map(customerService::delete)
                                                 .map(App::toByteBuf)
                                                 .log("http-server")))
 

@@ -2,8 +2,6 @@ package com.github.JonathanAGomez.MyBank.service;
 
 import com.github.JonathanAGomez.MyBank.domain.Customer;
 import com.github.JonathanAGomez.MyBank.repository.CustomerRepository;
-import io.netty.buffer.ByteBuf;
-import org.reactivestreams.Publisher;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -27,5 +25,9 @@ public class CustomerService {
 
     public Customer create(Customer customer){
         return customerRepo.create(customer);
+    }
+
+    public Mono<Customer> delete(Customer customer){
+        return customerRepo.delete(customer);
     }
 }
