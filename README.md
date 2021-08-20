@@ -10,9 +10,9 @@ Requests can be sent to other users to request funds/ send funds.
 Activity logs and itemized reciepts can be requested through our website.
 
 ## Tools
-# Java 8
-# Maven
-# Cassandra
-# Spring
+### Java 8
+### Maven
+### Cassandra
+### Spring
 
 Users can view changes made to accounts
